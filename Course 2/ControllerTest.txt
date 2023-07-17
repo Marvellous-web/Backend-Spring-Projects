@@ -1,0 +1,2 @@
+when data is going out of bound from java object to json then it is serialization
+and vice versa it is called deserialization from json to java object.

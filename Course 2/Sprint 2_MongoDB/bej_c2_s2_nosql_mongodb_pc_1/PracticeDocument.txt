@@ -1,0 +1,152 @@
+use adress_db; //creating and using database
+
+//inserted one document in collection
+db.address_db.insertOne(
+{
+houseNo:23,
+streetName:"Main Dave Street",
+city:"New York",
+zipcode:7001
+})
+
+//inserted many document
+db.address_db.insertMany([
+{
+houseNo:24,
+streetName:"Main Road Street",
+city:"New York",
+zipcode:8001
+},
+{
+houseNo:25,
+streetName:"Main Road Street",
+city:"Rochester",
+zipcode:9001
+},
+{
+houseNo:26,
+streetName:"R K Street",
+city:"KingStone",
+zipcode:1001
+},
+{
+houseNo:26,
+streetName:"Main Road Street",
+city:"India",
+zipcode:9001
+}
+])
+
+//display all address in a formatted manner
+db.address_db.find().pretty();
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872d"),
+        "houseNo" : 24,
+        "streetName" : "Main Road Street",
+        "city" : "New York",
+        "zipcode" : 8001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872e"),
+        "houseNo" : 25,
+        "streetName" : "Main Road Street",
+        "city" : "Rochester",
+        "zipcode" : 9001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872f"),
+        "houseNo" : 26,
+        "streetName" : "R K Street",
+        "city" : "KingStone",
+        "zipcode" : 1001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea28730"),
+        "houseNo" : 26,
+        "streetName" : "Main Road Street",
+        "city" : "India",
+        "zipcode" : 9001
+}
+{
+        "_id" : ObjectId("63ab292ecea6d656aea28731"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipcode" : 7001
+}
+
+
+//find the address by city Rochester
+ db.address_bd.find({city:"Rochester"}).pretty();
+{
+        "_id" : ObjectId("63ab2887cea6d656aea2872a"),
+        "houseNo" : 25,
+        "streetName" : "Main Road Street",
+        "city" : "Rochester",
+        "zipcode" : 9001
+}
+
+//count the number whose city New York
+ db.address_db.find({city:"New York"}).count();
+2
+
+//find the address by city Rochester,New York,KingSton
+db.address_db.find({$or:[{city:{$eq:"Rochester"} },{city:{$eq:"New York"}},{city:{$eq:"KingSton"}}]});
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872d"),
+        "houseNo" : 24,
+        "streetName" : "Main Road Street",
+        "city" : "New York",
+        "zipcode" : 8001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872e"),
+        "houseNo" : 25,
+        "streetName" : "Main Road Street",
+        "city" : "Rochester",
+        "zipcode" : 9001
+}
+{
+        "_id" : ObjectId("63ab292ecea6d656aea28731"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipcode" : 7001
+}
+
+//delete all document with city New York
+db.address_db.deleteMany( { city: "New York" } );//this command use for delete many document by particular feild
+
+ db.address_db.deleteOne( { city: "New York" } );//delete one document using particular field
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+//address collection after deleting the one document 
+ db.address_db.find().pretty();
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872e"),
+        "houseNo" : 25,
+        "streetName" : "Main Road Street",
+        "city" : "Rochester",
+        "zipcode" : 9001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea2872f"),
+        "houseNo" : 26,
+        "streetName" : "R K Street",
+        "city" : "KingStone",
+        "zipcode" : 1001
+}
+{
+        "_id" : ObjectId("63ab2919cea6d656aea28730"),
+        "houseNo" : 26,
+        "streetName" : "Main Road Street",
+        "city" : "India",
+        "zipcode" : 9001
+}
+{
+        "_id" : ObjectId("63ab292ecea6d656aea28731"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipcode" : 7001
+}

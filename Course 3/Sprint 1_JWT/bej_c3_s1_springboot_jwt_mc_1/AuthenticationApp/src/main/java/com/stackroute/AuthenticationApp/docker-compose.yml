@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  authenticationService:
+    image: auth-app-image
+    container_name: authentication_container
+    build:  .
+    ports:
+      - 44444:44444
+    networks:
+      - mynet2
+    depends_on:
+      - mysqlDbService
+    restart: always
+
+  mysqlDbService:
+    image: mysql
+    container_name: mysql_container
+    ports:
+      - 8080:8080
+    networks:
+      - mynet2
+    environment:
+      MYSQL_ROOT_PASSWORD:  password
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+networks:
+  mynet2:
+    driver: bridge

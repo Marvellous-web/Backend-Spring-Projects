@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyApp/AuthenticationApp/AuthenticationApp.iml" filepath="$PROJECT_DIR$/MyApp/AuthenticationApp/AuthenticationApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyApp/EurekaApp/EurekaApp.iml" filepath="$PROJECT_DIR$/MyApp/EurekaApp/EurekaApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyApp/GatewayDemo/GatewayDemo.iml" filepath="$PROJECT_DIR$/MyApp/GatewayDemo/GatewayDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyApp/MyApp.iml" filepath="$PROJECT_DIR$/MyApp/MyApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Rabbit MQ.iml" filepath="$PROJECT_DIR$/.idea/Rabbit MQ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyApp/UserMovie/UserMovie.iml" filepath="$PROJECT_DIR$/MyApp/UserMovie/UserMovie.iml" />
+    </modules>
+  </component>
+</project>

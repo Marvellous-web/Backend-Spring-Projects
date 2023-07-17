@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="GatewayDemo" />
+        <module name="AuthenticationApp" />
+        <module name="UserMovie" />
+        <module name="EurekaApp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AuthenticationApp" target="17" />
+      <module name="EurekaApp" target="17" />
+      <module name="GatewayDemo" target="17" />
+      <module name="MyApp" target="17" />
+      <module name="UserMovie" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

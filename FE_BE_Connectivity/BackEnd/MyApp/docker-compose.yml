@@ -1,0 +1,64 @@
+version: '3.9'
+services:
+  movieService:
+    container_name: movie_app_container
+    image: movie_app_image
+    build: UserMovie/
+    ports:
+      - 8091:8091
+    networks:
+      - mynetwork1
+    depends_on:
+      - mongoService
+
+
+  mongoService:
+    container_name: mongo_container1
+    image: mongo:3.6
+    ports:
+      - 27017:27017
+    networks:
+      - mynetwork1
+
+  authenticationService:
+    container_name: auth_app_container1
+    image: auth_app_image1
+    build: AuthenticationApp/
+    ports:
+      - 8081:8081
+    networks:
+      - mynetwork1
+    depends_on:
+      - mysqlService
+    restart: always
+
+  mysqlService:
+    container_name: mysql_container1
+    image: mysql
+    ports:
+      - 3306:3306
+    networks:
+      - mynetwork1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+
+  gatewayService:
+    container_name: gateway_app_container1
+    image: gateway_app_image1
+    build: GatewayDemo/
+    ports:
+      - 5555:5555
+    networks:
+      - mynetwork1
+    depends_on:
+      - authenticationService
+      - movieService
+
+
+networks:
+  mynetwork1:
+    driver: bridge

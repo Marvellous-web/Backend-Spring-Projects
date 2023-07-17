@@ -1,0 +1,44 @@
+package com.stackroute.ProductApp.Filter;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.web.filter.GenericFilterBean;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+
+public class JwtFilter extends GenericFilterBean {
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request=(HttpServletRequest)servletRequest;
+        HttpServletResponse response=(HttpServletResponse)servletResponse;
+
+        String authHeader=request.getHeader("authorization");//no case sensitive we can write anything inplace of-"authorization"
+        if ("OPTIONS".equals((request.getMethod()))) {
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            filterChain.doFilter(request,response);
+            
+        } else if (authHeader==null || !authHeader.startsWith("Bearer")) {
+            throw new ServletException("Missing or Invalid Exception");
+            
+        }
+        //for removing the bearer from the string we have to use substring method of String method
+        String token=authHeader.substring(7);
+        //PArsing fails if key is wrong /token expires / token tampered : throw exception
+        //here mysecurekey is comparing with the token- by using the method parseClaims
+        Claims claims= Jwts.parser().setSigningKey("mysecurekey").parseClaimsJws(token).getBody();
+        System.out.println("Claims in filter "+claims);
+        request.setAttribute("curr_user_emailid",claims.get("emailId"));
+        request.setAttribute("claims",claims);
+        //for forwarding the request; FilterChain class check the token in the request.
+        filterChain.doFilter(request,response);
+    }
+}
